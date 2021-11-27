@@ -1,0 +1,1 @@
+print('This is the main file of viz-it.\nIt contains nothing!! Happy now we, ehh?')
