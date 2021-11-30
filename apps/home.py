@@ -17,7 +17,3 @@ class Home(ST_PAGE):
 def app():
     app = Home('Viz-It', 'assets/home_bg.png', '#9ffff')
     app.render_details()
-
-
-
-

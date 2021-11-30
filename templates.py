@@ -1,5 +1,5 @@
-import streamlit as st
 import base64
+import streamlit as st
 
 class ST_PAGE():
     def __init__(self, title, background, font):

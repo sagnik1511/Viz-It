@@ -1,5 +1,5 @@
-import streamlit as st
 from apps import overview, home
+import streamlit as st
 
 pages = {
     'Home' : home.app,
@@ -11,4 +11,3 @@ if __name__ == "__main__":
     app = st.sidebar.selectbox('PAGES',pages.keys())
     if app != "":
         pages[app]()
-
