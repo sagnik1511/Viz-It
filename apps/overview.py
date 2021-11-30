@@ -1,29 +1,10 @@
-import base64
 import pandas as pd
 import os
 import streamlit as st
 import matplotlib.pyplot as plt
+from templates import ST_PAGE
 
-class Overview():
-
-    def __init__(self, title, background, font):
-        bg_ext = background.split('.')[-1]
-        self.font = font
-        st.markdown(
-            f"""<style>
-                .reportview-container {{
-                    background: url(data:image/{bg_ext};base64,{base64.b64encode(open(background, "rb").read()).decode()})
-                    }}
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    background-size: cover;
-                    }}
-                </style>""",
-            unsafe_allow_html=True
-        )
-        st.markdown(f"<h2 style='text-align: center; color:#{font};'>{title}</h2>",
-                    unsafe_allow_html=True)
-        super(Overview, self).__init__()
+class Overview(ST_PAGE):
 
     def data_handler(self):
         self.file = st.file_uploader("Upload data", type=['csv'])
@@ -50,9 +31,12 @@ class Overview():
             st.markdown(f"<h3 style='text-align: center; color:#{self.font};'>Column Overview</h3>",
                         unsafe_allow_html=True)
             column_overview_figure, column_overview_ax= plt.subplots(1,2,figsize = (15,5))
-            column_overview_ax[0].pie(self.data.dtypes.value_counts().values, labels = self.data.dtypes.value_counts().index)
+            column_overview_ax[0].pie(self.data.dtypes.value_counts().values,
+                                      labels = self.data.dtypes.value_counts().index)
             column_overview_ax[0].set_title('Pie-Chart')
-            column_overview_ax[1].bar(x = self.data.dtypes.value_counts(), height = self.data.dtypes.value_counts().values, tick_label = self.data.dtypes.value_counts().index)
+            column_overview_ax[1].bar(x = self.data.dtypes.value_counts(),
+                                      height = self.data.dtypes.value_counts().values,
+                                      tick_label = self.data.dtypes.value_counts().index)
             column_overview_ax[1].set_title('Bar diagram')
             column_overview_figure.suptitle('Column Overview')
             st.pyplot(fig = column_overview_figure)
@@ -74,5 +58,5 @@ class Overview():
         self.null_overview()
 
 def app():
-    app = Overview('Overview', 'src/bg.png', '#9ffff')
+    app = Overview('Overview', 'assets/overview_bg.jpg', '#9ffff')
     app.fire()
