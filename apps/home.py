@@ -8,7 +8,7 @@ class Home():
         self.font = font
         _, image_col, _ = st.columns(3)
         with image_col:
-            st.image("assets/logo_text.png", width=300)
+            st.image("assets/logo_text.png", width = 300)
         st.markdown(
             f"""<style>
                         .reportview-container {{
@@ -19,17 +19,17 @@ class Home():
                             background-size: cover;
                             }}
                         </style>""",
-            unsafe_allow_html=True
+            unsafe_allow_html = True
         )
     def render_details(self):
         st.markdown(
-            f"<h2 style='text-align: center; color:#9ffff;'>Simple Data Visualization tool developed using streamlit</h2>",
-            unsafe_allow_html=True)
+            f"<h2 style='text-align: center; color:{self.font};'>Simple Data Visualization tool developed using streamlit</h2>",
+            unsafe_allow_html = True)
         st.markdown(
-            f"<h2 style='text-align: center; color:#9ffff;'>Currently supported for csv files</h2>",
-            unsafe_allow_html=True)
+            f"<h2 style='text-align: center; color:{self.font};'>Currently supported for csv files</h2>",
+            unsafe_allow_html = True)
 
 
 def app():
-    app = Home('assets/cyan_bg.jpg', '#9ffff')
+    app = Home('assets/cyan_bg.jpg', "#49056e")
     app.render_details()

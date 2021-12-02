@@ -15,7 +15,7 @@ class ST_PAGE():
                     background-size: cover;
                     }}
                 </style>""",
-            unsafe_allow_html=True
+            unsafe_allow_html = True
         )
         st.markdown(f"<h1 style='text-align: center; color:#{font};'>{title}</h1>",
-                    unsafe_allow_html=True)
+                    unsafe_allow_html = True)
