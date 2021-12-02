@@ -1,4 +1,5 @@
 from apps import overview, home, eda
+from PIL import Image
 import streamlit as st
 
 pages = {
@@ -8,7 +9,8 @@ pages = {
 }
 
 if __name__ == "__main__":
-    st.sidebar.header("VIZ-IT")
+    logo = Image.open("assets/logo.png")
+    st.sidebar.image(logo, width = 150)
     app = st.sidebar.selectbox('PAGES',pages.keys())
     if app != "":
         pages[app]()

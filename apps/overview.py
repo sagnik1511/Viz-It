@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import os
 import pandas as pd
 import plotly.express as px
@@ -27,21 +26,6 @@ class Overview(ST_PAGE):
         if os.path.isfile('data.csv'):
             self.data = pd.read_csv('data.csv')
 
-    def column_overview(self):
-        if len(self.data.columns) > 0:
-            st.markdown(f"<h3 style='text-align: center; color:#00008B;'>Column Overview</h3>",
-                        unsafe_allow_html=True)
-            column_overview_figure, column_overview_ax= plt.subplots(1,2,figsize = (15,5))
-            column_overview_ax[0].pie(self.data.dtypes.value_counts().values,
-                                      labels = self.data.dtypes.value_counts().index)
-            column_overview_ax[0].set_title('Pie-Chart')
-            column_overview_ax[1].bar(x = self.data.dtypes.value_counts(),
-                                      height = self.data.dtypes.value_counts().values,
-                                      tick_label = self.data.dtypes.value_counts().index)
-            column_overview_ax[1].set_title('Bar diagram')
-            column_overview_figure.suptitle('Column Overview')
-            st.pyplot(fig = column_overview_figure)
-
     def null_overview(self):
         if len(self.data.columns) > 0:
             st.markdown(f"<h3 style='text-align: center; color:#00008B;'>Missing Value Analysis</h3>",
@@ -61,6 +45,19 @@ class Overview(ST_PAGE):
             st.markdown(
                 f"<h5 style='text-align: center; color:#{self.font};'>Duplicate columns : {col_duplicate_count}</h5>",
                 unsafe_allow_html=True)
+    def column_overview(self):
+        if len(self.data.columns) > 0:
+            st.markdown(f"<h3 style='text-align: center; color:#00008B;'>Column Overview</h3>",
+                        unsafe_allow_html=True)
+            cols_data = pd.DataFrame(
+                {
+                    'name': self.data.dtypes.value_counts().index.astype('str').tolist(),
+                    'value': self.data.dtypes.value_counts().values.astype('int64').tolist()
+                }
+            )
+
+            bar_fig = px.bar(x = cols_data['name'], y = cols_data['value'])
+            st.plotly_chart(bar_fig)
 
     def fire(self):
         self.data_handler()
@@ -70,5 +67,5 @@ class Overview(ST_PAGE):
         self.duplicates_overview()
 
 def app():
-    app = Overview('Overview', 'assets/overview_bg.jpg', '#9ffff')
+    app = Overview('Overview', 'assets/fadered_bg.png', '#9ffff')
     app.fire()

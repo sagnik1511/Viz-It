@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import os
 import pandas as pd
 import plotly.express as px
@@ -50,5 +49,5 @@ class EDA(ST_PAGE):
         self.choose_feature()
 
 def app():
-    app = EDA("Exploratory Data Analysis", "assets/eda_bg.jpg",'#9ffff')
+    app = EDA("Exploratory Data Analysis", "assets/green_bg.jpg",'#9ffff')
     app.fire()
