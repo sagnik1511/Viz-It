@@ -1,9 +1,10 @@
-from apps import overview, home
+from apps import overview, home, eda
 import streamlit as st
 
 pages = {
     'Home' : home.app,
     'Overview': overview.app,
+    'EDA': eda.app,
 }
 
 if __name__ == "__main__":

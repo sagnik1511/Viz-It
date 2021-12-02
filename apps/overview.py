@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import os
 import pandas as pd
+import plotly.express as px
 import streamlit as st
 from templates import ST_PAGE
 
@@ -28,7 +29,7 @@ class Overview(ST_PAGE):
 
     def column_overview(self):
         if len(self.data.columns) > 0:
-            st.markdown(f"<h3 style='text-align: center; color:#{self.font};'>Column Overview</h3>",
+            st.markdown(f"<h3 style='text-align: center; color:#00008B;'>Column Overview</h3>",
                         unsafe_allow_html=True)
             column_overview_figure, column_overview_ax= plt.subplots(1,2,figsize = (15,5))
             column_overview_ax[0].pie(self.data.dtypes.value_counts().values,
@@ -43,19 +44,30 @@ class Overview(ST_PAGE):
 
     def null_overview(self):
         if len(self.data.columns) > 0:
-            st.markdown(f"<h3 style='text-align: center; color:#{self.font};'>Missing Value Analysis</h3>",
+            st.markdown(f"<h3 style='text-align: center; color:#00008B;'>Missing Value Analysis</h3>",
                         unsafe_allow_html=True)
-            null_overview_figure = plt.figure(figsize=(15, 5))
-            plt.bar(self.data.isnull().sum().index,self.data.isnull().sum().values)
-            plt.xticks(rotation = 90)
-            plt.yticks([])
-            st.pyplot(fig = null_overview_figure)
+            null_overview_figure = px.bar(x = self.data.isnull().sum().index,
+                                          y = self.data.isnull().sum().values)
+            st.plotly_chart(null_overview_figure, use_container_width=True)
+
+    def duplicates_overview(self):
+        if len(self.data.columns) > 0:
+            st.markdown(f"<h3 style='text-align: center; color:#00008B;'>Duplicate Value Analysis</h3>",
+                        unsafe_allow_html=True)
+            row_duplicate_count = len(self.data) - len(self.data.drop_duplicates())
+            st.markdown(f"<h5 style='text-align: center; color:#{self.font};'>Duplicate rows : {row_duplicate_count}</h5>",
+                        unsafe_allow_html=True)
+            col_duplicate_count = self.data.shape[1] - self.data.T.drop_duplicates().shape[0]
+            st.markdown(
+                f"<h5 style='text-align: center; color:#{self.font};'>Duplicate columns : {col_duplicate_count}</h5>",
+                unsafe_allow_html=True)
 
     def fire(self):
         self.data_handler()
         self.fetch_data()
         self.column_overview()
         self.null_overview()
+        self.duplicates_overview()
 
 def app():
     app = Overview('Overview', 'assets/overview_bg.jpg', '#9ffff')
