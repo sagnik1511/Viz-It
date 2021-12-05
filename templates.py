@@ -17,5 +17,5 @@ class ST_PAGE():
                 </style>""",
             unsafe_allow_html = True
         )
-        st.markdown(f"<h1 style='text-align: center; color:#{font};'>{title}</h1>",
+        st.markdown(f"<h1 style='text-align: center; color:#{self.font};'>{title}</h1>",
                     unsafe_allow_html = True)

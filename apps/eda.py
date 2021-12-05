@@ -23,8 +23,7 @@ class EDA(ST_PAGE):
             self.count_null_values(feature)
             if self.data[feature].dtype == 'object':
                 self.check_unique_value_distribution_for_object_data_type_features(feature)
-                if self.data[feature].value_counts().values.tolist()[0] > 30:
-                    self.generate_word_cloud(feature)
+                self.generate_word_cloud(feature)
             else:
                 self.add_imp_stat_values(feature)
                 self.create_line_charts(feature)
@@ -54,7 +53,7 @@ class EDA(ST_PAGE):
     def add_imp_stat_values(self, feature):
         feature_array = np.array(self.data[feature].tolist())
         st.markdown(
-            f"<h3 style='text-align: center; color:{self.font};'>Important Statistial Values</h3>",
+            f"<h3 style='text-align: center; color:{self.font};'>Important Statistical Values</h3>",
             unsafe_allow_html = True)
         st.markdown(
             f"<h5 style='text-align: center;'>Mean : {'%.3f'%np.mean(feature_array)}</h5>",
@@ -69,8 +68,8 @@ class EDA(ST_PAGE):
             f"<h5 style='text-align: center;'>Variance : {'%.3f'%np.var(feature_array)}</h5>",
             unsafe_allow_html = True)
 
-    def count_null_values(self,feature):
-        if len(self.data) >0:
+    def count_null_values(self, feature):
+        if len(self.data) > 0:
             st.markdown(f"<h3 style='text-align: center; color:{self.font};'>Null values : {self.data[feature].isnull().sum()}</h3>",
                         unsafe_allow_html = True)
 
@@ -81,7 +80,7 @@ class EDA(ST_PAGE):
         feature_array = self.data[feature].tolist()
         feature_string = " ".join(feature_array)
         wordcloud_plot = WordCloud(max_font_size = 40).generate(feature_string)
-        _,wc_col,_,_,_,_,_,_,_,_,_,_ = st.columns(12)
+        _, wc_col, _ = st.columns([0.2, 1, 1])
         with wc_col:
             st.image(wordcloud_plot.to_array(), width = 600)
 
@@ -96,7 +95,7 @@ class EDA(ST_PAGE):
 
     def create_hist_plot(self, feature):
         st.markdown(
-            f"<h3 style='text-align: center; color:{self.font};'>Histogram : Visualize the Outliers</h3>",
+            f"<h3 style='text-align: center; color:{self.font};'>Histogram : Visualize Density Distribution</h3>",
             unsafe_allow_html = True)
         feature_array = self.data[feature].tolist()
         box_plot_fig = px.histogram(feature_array,
@@ -110,7 +109,7 @@ class EDA(ST_PAGE):
         feature_array = self.data[feature].tolist()
         scatter_plot_fig = px.scatter(x = range(len(feature_array)),
                                   y = feature_array,
-                                  title=f"Data Distribution ({feature})")
+                                  title=f"Spatial Data Distribution ({feature})")
         st.plotly_chart(scatter_plot_fig, use_container_width = True)
 
     def create_box_plot(self, feature):
@@ -119,7 +118,7 @@ class EDA(ST_PAGE):
             unsafe_allow_html = True)
         feature_array = self.data[feature].tolist()
         box_plot_fig = px.box(feature_array,
-                              title = f"Oulier Detection ({feature})")
+                              title = f"Outlier Detection ({feature})")
         st.plotly_chart(box_plot_fig, use_container_width = True)
 
 
