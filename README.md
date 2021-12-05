@@ -63,7 +63,17 @@
 6. Now to fire the web-application run this command on terminal.
 
         $streamlit run main.py
-7. Now use it for files under 200MB in size. (Will update this for larger files soon).
+7. Now use it for files under 200MB in size. (Will update for larger files soon).
+
+<div align = "center"><h1>Interface</h1></div>
+
+
+|Page|Desktop Interface|
+|-|-|
+|Home|![](https://github.com/sagnik1511/Viz-It/blob/main/assets/screenshots/home.png)|
+|Overview|![](https://github.com/sagnik1511/Viz-It/blob/main/assets/screenshots/overview.png)|
+|EDA|![](https://github.com/sagnik1511/Viz-It/blob/main/assets/screenshots/eda.png)|
+|Correlation|![](https://github.com/sagnik1511/Viz-It/blob/main/assets/screenshots/correlation.png)|
 
 
 <div align = "center"><h1>Goals</h1></div>
