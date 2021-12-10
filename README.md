@@ -45,8 +45,8 @@
 
 <div align = "center"><h1>Deployments</h1></div>
 
-<div  align = "center"><h3>The project is currently deployed at heroku. <a href = "https://viz-it.herokuapp.com">Deployed Project</a></h3></div>
-
+<div  align = "center"><h3>Heroku : <a href = "https://viz-it.herokuapp.com">viz-it.herokuapp.com</a></h3></div>
+<div  align = "center"><h3>Streamlit Server : <a href = "https://share.streamlit.io/sagnik1511/viz-it/main/main.py">share.streamlit.io/sagnik1511/viz-it/main/main.py</a></h3></div>
 <div align = "center"><h3>If you want to use it locally you can follow the installation methods shared below.</h3></div>
 
 <div align = "center"><h1>Installation</h1></div>
